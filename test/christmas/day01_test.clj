@@ -3,3 +3,4 @@
   		  	[expectations :refer :all]
             [clojure.string :as str]))
 
+(def file (slurp "resources/day03real"))
