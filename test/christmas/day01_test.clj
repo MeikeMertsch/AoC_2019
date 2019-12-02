@@ -1,7 +1,9 @@
 (ns christmas.day01-test
-  (:require [christmas.day01 :as chr]
+    (:require [christmas.day01 :as chr]
   		  	[expectations :refer :all]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+    )
+)
 
 (comment
 (def file (slurp "resources/day01real"))
@@ -15,5 +17,4 @@
 
 (expect 3352674 (chr/total-fuel values))
 (expect 5026151 (chr/total-all values))
-
 )
