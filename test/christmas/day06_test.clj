@@ -3,6 +3,7 @@
   		  	[expectations :refer :all]
             [clojure.string :as str]))
 
+(comment
 (def file (slurp "resources/day06real"))
 (def t-file "COM)B
 B)C
@@ -41,5 +42,6 @@ I)SAN")
 (expect 42 (chr/game t-file))
 ;(expect 147807 (chr/game file "COM"))
 
-(expect 42 (chr/game2 t2-file "YOU"))
-(expect 42 (chr/game2 file "YOU"))
+(expect 2 (chr/game2 t2-file "YOU"))
+(expect 229 (chr/game2 file "YOU")) ;; ~ 1 min
+)
