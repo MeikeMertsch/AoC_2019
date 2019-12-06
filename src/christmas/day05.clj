@@ -8,8 +8,6 @@
        vec))
 
 (defn get-value [program position mode]
-  ;(doall (println position mode))
-  ;(doall (println (get program position)))
   (case mode
     0 (get program (get program position))
     1 (get program position)))
@@ -19,8 +17,6 @@
   (let [pos1 (get-value program (inc position) mode1)
         pos2 (get-value program (+ 2 position) mode2)
         posr (get-value program (+ 3 position) 1)]
-    ;(doall (println (take 4 (drop position program))))
-    ;(doall (println pos1 " " pos2 " " posr))
     (-> (update-in game [:program posr] (constantly (funct pos1 pos2)))
         (update :position (partial + 4)))))
 
@@ -78,8 +74,7 @@
        :output
        (sort-by first)
        last
-       last
-       ))
+       last))
 
 (defn program1205 [file input]
   (->> (parse file)
