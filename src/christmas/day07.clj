@@ -3,7 +3,6 @@
             [christmas.tools :as tools]
             [clojure.math.combinatorics :as combo]))
 
-
 (defn parse [file]
   (->> (re-seq #"-?\d+" file)
        (map tools/parse-int)
@@ -18,7 +17,6 @@
   (let [pos1 (get-value program (inc position) mode1)
         pos2 (get-value program (+ 2 position) mode2)
         posr (get-value program (+ 3 position) 1)]
-    ;(doall (println position ":" pos1 " " pos2 " " posr))
     (-> (update-in game [:program posr] (constantly (funct pos1 pos2)))
         (update :position (partial + 4)))))
 
@@ -59,7 +57,6 @@
 
 (defn tick [{:keys [position program] :as game}]
   (let [instruction (decrypt-instr (get program position))]
-    ;(doall (println "instructions: " instruction " original: " (get program position)))
     (-> (case (:optcode instruction)
           1 (do-thing game instruction +)
           2 (do-thing game instruction *)
@@ -73,23 +70,11 @@
 
 (defn traverse [program]
   (->> (iterate tick program)
-       ;(take-while #(and (:continue %) (:can-run %)))
-       ;last
        (drop-while #(and (:continue %) (:can-run %)))
-       first
-       ))
+       first))
 
 (defn build-amp [input program]
   {:program program :position 0 :continue true :input input :can-run true})
-
-(defn amplifier [file input]
-  ;(doall (println "input: " input))
-  (->> (parse file)
-       (build-amp input)
-       traverse
-       :output
-       ))
-
 
 (defn tick-amp [pgm which]
   (update pgm which traverse))
