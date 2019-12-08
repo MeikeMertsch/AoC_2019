@@ -18,16 +18,9 @@
 
 (def colours {0 " ", 1 "X" nil "."})
 
-(defn draw [picture]
-  (->> (map (partial apply str) picture)
-       (interleave (repeat "\n"))
-       (apply str)
-       (println)))
-
-
 (defn message [file [width _ :as layer-size]]
   (->> (parse-layers file layer-size)
        (apply map vector)
        (map (comp colours first #(drop-while #{2} %)))
        (partition width)
-       (draw)))
+       (tools/draw)))

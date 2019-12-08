@@ -2,6 +2,20 @@
 	(:require [clojure.string :as str]
 		      [expectations :refer :all]))
 
+(defn parse-int [string]
+  (Integer/parseInt string))
+
+(defn draw [picture]
+  (->> (map (partial apply str) picture)
+       (interleave (repeat "\n"))
+       (apply str)
+       (println)))
+
+
+
+
+
+(comment
 (def f-test-header "(ns christmas.chr%s.day%s-test
   (:require [christmas.chr%s.day%s :as chr]
   		  	[expectations :refer :all]
@@ -28,10 +42,7 @@
 	(create-file (create-string f-test-path year day) (create-string f-test-header year day))
 	(create-file (create-string f-res-path year day) ""))
 
-(defn parse-int [string]
-	(Integer/parseInt string))
-
-
+)
 ;(expect "" )
 ;(expect "" (map (partial prepare 16) (map (partial str "0") (range 1 10))))
 ;(expect "" (map (partial prepare 16) (range 10 26)))
